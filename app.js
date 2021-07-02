@@ -1,4 +1,4 @@
-let min = 1, max = 100, winningNum = getRandomNum(min,max), totalGuesses = 5, guessLeft = totalGuesses;
+let min = 1, max = 50, winningNum = getRandomNum(min,max), totalGuesses = 5, guessLeft = totalGuesses;
 
 const
 	game = document.querySelector('#game'),
