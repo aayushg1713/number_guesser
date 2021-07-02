@@ -1,4 +1,4 @@
-let min = 1, max = 100, winningNum = getRandomNum(min,max), totalGuesses = 3, guessLeft = totalGuesses;
+let min = 1, max = 10, winningNum = getRandomNum(min,max), totalGuesses = 3, guessLeft = totalGuesses;
 
 const
 	game = document.querySelector('#game'),
@@ -44,7 +44,7 @@ guessBtn.addEventListener('click',function(){
 			gameOver(true,`Congrats you have guessed the correct number in ${totalGuesses - guessLeft} guesses!!`);
 		}
 	}
-	else
+	else if(guess < winningNum)
 	{
 		guessLeft--;
 		guessInput.value = '';
@@ -59,10 +59,27 @@ guessBtn.addEventListener('click',function(){
 		{
 			guessInput.style.borderColor = 'red';
 			guessBtn.style.borderColor = 'red' ;
-			setMessage(`${guess} is incorrect. You have ${guessLeft} guesses left.`,'red');
-			setTimeout(clearMessage,5000);
+			setMessage(`${guess} is less than Winning Number. You have ${guessLeft} guesses left.`,'red');
 		}
-	}	
+	}
+	else if(guess > winningNum)
+	{
+		guessLeft--;
+		guessInput.value = '';
+		if(guessLeft === 0)
+		{
+			// guessBtn.value = 'Restart';
+			// guessInput.disabled = true;
+			// guessInput.style.borderColor = 'red';
+			gameOver(false,`You have lost. The winning number was ${winningNum}.`);
+		}
+		else
+		{
+			guessInput.style.borderColor = 'red';
+			guessBtn.style.borderColor = 'red' ;
+			setMessage(`${guess} is more than Winning Number. You have ${guessLeft} guesses left.`,'red');
+		}	
+	}
 });
 
 function setMessage(msg,color){
